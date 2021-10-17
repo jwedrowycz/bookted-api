@@ -27,7 +27,8 @@ class AuctionFactory extends Factory
             'user_id'  => rand(1,10),
             'book_id'  => $this->faker->unique()->numberBetween(1, $books->count()),
             'price' => $this->faker->numberBetween(10,999),
-            'views' => $this->faker->numberBetween(0,2000)
+            'views' => $this->faker->numberBetween(0,2000),
+            'created_at' => $this->faker->dateTimeBetween('-6 weeks', 'now')
         ];
     }
 }

@@ -16,6 +16,8 @@ class AuctionResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'price' => $this->price,
+            'created_at' => $this->created_at,
             'book' => [
                 'id' => $this->book->id,
                 'title' => $this->book->title,
@@ -23,7 +25,6 @@ class AuctionResource extends JsonResource
                 'category' => $this->book->category->name,
                 'book_condition' => $this->book->bookCondition->value,
             ],
-            'price' => $this->price
         ];
     }
 }
