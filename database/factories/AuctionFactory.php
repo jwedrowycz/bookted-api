@@ -3,7 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Auction;
+use App\Models\AuctionImage;
 use App\Models\Book;
+use App\Models\Image;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AuctionFactory extends Factory

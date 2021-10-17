@@ -19,4 +19,9 @@ class Auction extends Model
         return $this->belongsTo(Auction::class);
     }
 
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
 }
