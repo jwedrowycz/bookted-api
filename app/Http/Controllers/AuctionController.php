@@ -16,7 +16,7 @@ class AuctionController extends Controller
     public function index()
     {
         return AuctionResource::collection(
-            Auction::with([ 'user', 'book', 'book.bookCondition', 'book.category'])->latest()->paginate(50)
+            Auction::with([ 'user', 'book', 'book.bookCondition', 'book.category', 'images'])->latest()->paginate(50)
         );
     }
 
@@ -47,9 +47,11 @@ class AuctionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Auction $auction)
     {
-        //
+        return AuctionResource::collection(
+            $auction->with([ 'user', 'book', 'book.bookCondition', 'book.category', 'images'])->latest()->paginate(50)
+        );
     }
 
     /**
