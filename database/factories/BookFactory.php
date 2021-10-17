@@ -24,7 +24,6 @@ class BookFactory extends Factory
         return [
             'title' => $this->faker->sentence(4),
             'description' => $this->faker->text(),
-            'price' => $this->faker->numberBetween(10,999),
             'book_condition_id' => $this->faker->numberBetween(1,5),
             'category_id' => $this->faker->numberBetween(1,5),
 

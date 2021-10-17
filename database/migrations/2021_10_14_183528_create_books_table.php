@@ -19,7 +19,6 @@ class CreateBooksTable extends Migration
             $table->softDeletes();
             $table->string('title');
             $table->text('description');
-            $table->float('price', 8, 2);
             $table->date('publish_date')->nullable();
             $table->foreignId('book_condition_id')->constrained();
             $table->foreignId('category_id')->constrained();

@@ -19,6 +19,7 @@ class CreateAuctionsTable extends Migration
             $table->integer('views')->default(0);
             $table->foreignId('user_id')->constrained();
             $table->foreignId('book_id')->constrained();
+            $table->float('price', 8, 2);
             $table->datetime('bought_at')->nullable()->default(null);
             $table->datetime('paid_at')->nullable()->default(null);
 

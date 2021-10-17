@@ -25,7 +25,8 @@ class AuctionFactory extends Factory
         $books = Book::all();
         return [
             'user_id'  => rand(1,10),
-            'book_id'  => $this->faker->unique()->numberBetween(1, $books->count())
+            'book_id'  => $this->faker->unique()->numberBetween(1, $books->count()),
+            'price' => $this->faker->numberBetween(10,999),
         ];
     }
 }
