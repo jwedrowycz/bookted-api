@@ -22,6 +22,12 @@ class AuctionTest extends TestCase
                             'id',
                             'price',
                             'created_at',
+                            'user' => [
+                                'id',
+                                'email',
+                                'name',
+                                'num_phone',
+                            ],
                             'book' => [
                                 'id',
                                 'title',
