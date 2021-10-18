@@ -42,6 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public static function getAuctions()
+    {
+        return User::with(['auctions', 'auctions.book', 'auctions.book.bookCondition', 'auctions.book.category', 'auctions.images']);
+    }
+
     public function auctions()
     {
         return $this->hasMany(Auction::class);

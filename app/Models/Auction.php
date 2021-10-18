@@ -9,6 +9,11 @@ class Auction extends Model
 {
     use HasFactory;
 
+    public static function getAuctions()
+    {
+        return Auction::with([ 'user', 'book', 'book.bookCondition', 'book.category', 'images']);
+    }
+
     public function book()
     {
         return $this->belongsTo(Book::class);
