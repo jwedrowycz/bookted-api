@@ -47,11 +47,9 @@ class AuctionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Auction $auction)
+    public function show($id)
     {
-        return AuctionResource::collection(
-            $auction->with([ 'user', 'book', 'book.bookCondition', 'book.category', 'images'])->latest()->paginate(50)
-        );
+        return new AuctionResource(Auction::findOrFail($id));
     }
 
     /**
