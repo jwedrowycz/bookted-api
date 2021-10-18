@@ -9,14 +9,11 @@ class Book extends Model
 {
     use HasFactory;
 
+    // protected $with = ['auction', 'category', 'bookCondition'];
+
     public function auction()
     {
         return $this->belongsTo(Auction::class);
-    }
-    
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 
     public function category()

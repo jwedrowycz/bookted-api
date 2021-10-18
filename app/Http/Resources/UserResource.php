@@ -18,7 +18,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'username' => $this->username,
             'email' => $this->email,
-            'auctions' => $this->auctions
+            'auctions' => UserAuctionResource::collection($this->auctions->load(['user', 'book', 'images', 'book.category', 'book.bookCondition']))
         ];
     }
 }

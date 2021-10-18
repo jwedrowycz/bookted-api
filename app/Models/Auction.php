@@ -9,7 +9,7 @@ class Auction extends Model
 {
     use HasFactory;
 
-    protected $with = ['user', 'book', 'book.bookCondition', 'book.category', 'images'];
+    // protected $with = ['user', 'book', 'images'];
 
     public function book()
     {

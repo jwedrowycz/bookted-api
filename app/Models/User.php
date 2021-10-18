@@ -42,7 +42,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $with = ['auctions'];
+    // protected $with = ['auctions'];
 
     // , 'auctions.book', 'auctions.book.bookCondition', 'auctions.book.category', 'auctions.images'
     public function auctions()
