@@ -15,7 +15,6 @@ class CreateRatesTable extends Migration
     {
         Schema::create('rates', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->integer('value');
         });
     }

@@ -15,7 +15,6 @@ class CreateBookConditionsTable extends Migration
     {
         Schema::create('book_conditions', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->integer('value');
         });
     }
