@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\AuctionResource;
+use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\Auction;
 use App\Models\User;
@@ -51,7 +52,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return new UserResource(User::findOrFail($id));
     }
 
     /**
