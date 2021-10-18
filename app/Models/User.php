@@ -42,7 +42,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function getAuctions()
+    public static function getUsers()
     {
         return User::with(['auctions', 'auctions.book', 'auctions.book.bookCondition', 'auctions.book.category', 'auctions.images']);
     }

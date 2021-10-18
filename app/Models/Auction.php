@@ -21,7 +21,7 @@ class Auction extends Model
 
     public function user()
     {
-        return $this->belongsTo(Auction::class);
+        return $this->belongsTo(User::class);
     }
 
     public function images()
