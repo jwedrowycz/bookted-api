@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Auction;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -18,7 +19,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'username' => $this->username,
             'email' => $this->email,
-            'auctions' => UserAuctionResource::collection($this->auctions->load(['user', 'book', 'images', 'book.category', 'book.bookCondition']))
+            'auctions' => UserAuctionResource::collection($this->auctions)
         ];
     }
 }

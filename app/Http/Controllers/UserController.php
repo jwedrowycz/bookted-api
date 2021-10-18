@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         return UserResource::collection(
-            User::latest()->paginate(50)
+            User::with('auctions', 'auctions.book', 'auctions.images', 'auctions.book.category', 'auctions.book.bookCondition')->latest()->paginate(50)
         );
     }
 

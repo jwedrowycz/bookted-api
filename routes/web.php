@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    UserResource::collection(
+        User::with('auctions', 'auctions.book', 'auctions.images', 'auctions.book.category', 'auctions.book.bookCondition')->latest()->paginate(50)
+    );
     return view('welcome');
 });
