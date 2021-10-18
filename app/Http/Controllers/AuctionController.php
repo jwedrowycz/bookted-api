@@ -16,7 +16,7 @@ class AuctionController extends Controller
     public function index()
     {
         return AuctionResource::collection(
-            Auction::getAuctions()->latest()->paginate(50)
+            Auction::latest()->paginate(50)
         );
     }
 
