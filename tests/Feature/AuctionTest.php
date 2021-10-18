@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
-class UserTest extends TestCase
+class AuctionTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -20,28 +20,22 @@ class UserTest extends TestCase
                     'data' => [
                         '*' => [
                             'id',
-                            'username',
-                            'email',
+                            'price',
                             'created_at',
-                            'auctions' => [
-                                'id',
-                                'price',
-                                'created_at',
-                                'book' => [
+                            'book' => [
                                 'id',
                                 'title',
                                 'description',
                                 'category',
                                 'book_condition',
-                                ],
-                                'images' => [
-                                    '*' => [
-                                        'id',
-                                        'created_at',
-                                        'updated_at',
-                                        'filename', 
-                                        'auction_id'
-                                    ]
+                            ],
+                            'images' => [
+                                '*' => [
+                                    'id',
+                                    'created_at',
+                                    'updated_at',
+                                    'filename', 
+                                    'auction_id'
                                 ]
                             ]
                         ]
