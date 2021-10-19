@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAuctionBookRequest;
 use App\Http\Resources\AuctionResource;
 use App\Models\Auction;
 use App\Models\Book;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -28,23 +30,36 @@ class AuctionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAuctionBookRequest $request)
     {
-        $data = DB::transaction(function () use ($request) {
+        $validated = $request->validated();
+        $data = DB::transaction(function () use ($validated) {
             $book = Book::create([
-                'title' => $request['title'],
-                'description' => $request['description'],
-                'publish_date' => $request['publish_date'],
-                'book_condition_id' => $request['book_condition_id'],
-                'category_id' => $request['category_id'],
+                'title' => $validated['title'],
+                'description' => $validated['description'],
+                'publish_date' => $validated['publish_date'],
+                'book_condition_id' => $validated['book_condition_id'],
+                'category_id' => $validated['category_id'],
             ]);
 
             $auction = Auction::create([
-                'price' => $request['price'],
-                'user_id' => $request['user_id'], // replace with auth()->id()
+                'price' => $validated['price'],
+                'user_id' => $validated['user_id'], // replace with auth()->id()
                 'book_id' => $book->id,
             ]);
-            return ['data' => ['auction' => $auction, 'book' => $book]];
+
+            $images = [];
+            if(isset($validated['images'])){
+                foreach ($validated['images'] as $key=>$file) {
+                    $filename = $file->store('images');
+                    $images[] = Image::create([
+                        'auction_id' => $auction->id,
+                        'filename' => $filename
+                    ]);
+                }
+                
+            }
+            return ['data' => ['auction' => $auction, 'book' => $book, 'images' => $images]];
         });
         return response()->json($data, 201);
     }
