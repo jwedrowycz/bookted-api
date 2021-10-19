@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -42,6 +43,23 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
+        ]);
+    }
+
+    public function login(Request $request)
+    {
+        $user = User::where('email', $request['login'])->orWhere('username', $request['login'])->first();
+
+        if(!$user || !Hash::check($request['password'], $user->password)) {
+
+            return response()->json(['message' => 'Invalid login details'], 401);
+        }
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+                'access_token' => $token,
+                'token_type' => 'Bearer',
         ]);
     }
 }

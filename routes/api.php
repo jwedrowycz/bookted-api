@@ -26,3 +26,4 @@ Route::apiResource('auctions', AuctionController::class);
 Route::apiResource('users', UserController::class);
 
 Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
