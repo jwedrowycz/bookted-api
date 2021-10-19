@@ -11,7 +11,7 @@ class UserTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testIndexReturnsDataInValidFormat() {
+    public function testUserReturnsDataInValidFormat() {
     
         $this->json('get', 'api/users')
              ->assertStatus(Response::HTTP_OK)

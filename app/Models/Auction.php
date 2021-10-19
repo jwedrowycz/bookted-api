@@ -11,6 +11,8 @@ class Auction extends Model
 
     // protected $with = ['user', 'book', 'images'];
 
+    protected $fillable = ['user_id', 'book_id', 'price'];
+
     public function book()
     {
         return $this->belongsTo(Book::class);

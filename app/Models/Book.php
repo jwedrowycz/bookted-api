@@ -10,6 +10,7 @@ class Book extends Model
     use HasFactory;
 
     // protected $with = ['auction', 'category', 'bookCondition'];
+    protected $fillable = ['title', 'description', 'publish_date', 'book_condition_id', 'category_id'];
 
     public function auction()
     {

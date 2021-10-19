@@ -11,9 +11,9 @@ class AuctionTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testIndexReturnsDataInValidFormat() {
+    public function testAuctionsReturnsDataInValidFormat() {
     
-        $this->json('get', 'api/users')
+        $this->json('get', 'api/auctions')
              ->assertStatus(Response::HTTP_OK)
              ->assertJsonStructure(
                 [
