@@ -47,7 +47,7 @@ class AuctionController extends Controller
 
             $auction = Auction::create([
                 'price' => $validated['price'],
-                'user_id' => $validated['user_id'], // replace with auth()->id()
+                'user_id' => auth()->id(),
                 'book_id' => $book->id,
             ]);
 
