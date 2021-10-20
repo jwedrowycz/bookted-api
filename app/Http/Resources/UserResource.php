@@ -19,6 +19,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'username' => $this->username,
             'email' => $this->email,
+            'last_login_at' => $this->last_login_at,
             'auctions' => UserAuctionResource::collection($this->auctions)
         ];
     }

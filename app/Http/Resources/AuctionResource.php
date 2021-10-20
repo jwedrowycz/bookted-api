@@ -24,7 +24,8 @@ class AuctionResource extends JsonResource
                 'username' => $this->user->username,
                 'name' => $this->user->name,
                 'created_at' => $this->user->created_at,
-                'phone' => $this->user->num_phone
+                'phone' => $this->user->num_phone,
+                'last_login_at' => $this->user->last_login_at,
             ],
             'book' => [
                 'id' => $this->book->id,
@@ -32,6 +33,7 @@ class AuctionResource extends JsonResource
                 'description' => $this->book->description,
                 'category' => $this->book->category->name,
                 'book_condition' => $this->book->bookCondition->value,
+                'publish_date' => $this->book->publish_date,
             ],
             'images' => $this->images
         ];

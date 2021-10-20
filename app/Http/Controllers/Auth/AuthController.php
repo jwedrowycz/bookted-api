@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    
 
     /**
      * Handle an incoming registration request.
@@ -56,6 +58,10 @@ class AuthController extends Controller
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
+
+        $user->update([
+            'last_login_at' => Carbon::now(),
+        ]);
 
         return response()->json([
                 'access_token' => $token,

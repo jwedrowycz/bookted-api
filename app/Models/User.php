@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -22,7 +23,8 @@ class User extends Authenticatable
         'email',
         'password',
         'username',
-        'num_phone'
+        'num_phone',
+        'last_login_at',
     ];
 
     /**
@@ -44,11 +46,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // protected $with = ['auctions'];
+    public function getLastLoginAtAttribute($value)
+    {
+        $data = Carbon::parse($value);
+        return $data->diffForHumans();
+    }
 
-    // , 'auctions.book', 'auctions.book.bookCondition', 'auctions.book.category', 'auctions.images'
+    public function getCreatedAtAttribute($value)
+    {
+        $data = Carbon::parse($value);
+        return $data->isoFormat('d MMM Y'); // ex. 6 sie 2021
+    }
+    
     public function auctions()
     {
         return $this->hasMany(Auction::class);
     }
+
+  
 }
