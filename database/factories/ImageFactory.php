@@ -26,7 +26,7 @@ class ImageFactory extends Factory
         $auctions = Auction::all();
 
         return [
-            'filename' => 'https://source.unsplash.com/random',
+            'filename' => 'https://source.unsplash.com/random/'.$this->faker->numberBetween(400,1000) . 'x' . $this->faker->numberBetween(500,1900),
             'auction_id'  => $this->faker->numberBetween(1, $auctions->count()),
         ];
     }
