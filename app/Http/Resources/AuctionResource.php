@@ -35,7 +35,7 @@ class AuctionResource extends JsonResource
                 'book_condition' => $this->book->bookCondition->value,
                 'publish_date' => $this->book->publish_date,
             ],
-            'images' => $this->images
+            'images' => ImageResource::collection($this->images)
         ];
     }
 }
