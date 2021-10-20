@@ -17,11 +17,13 @@ class AuctionResource extends JsonResource
         return [
             'id' => $this->id,
             'price' => $this->price,
+            'views' => $this->views,
             'created_at' => $this->created_at,
             'user' => [
                 'id' => $this->user->id,
-                'created_at' => $this->user->created_at,
+                'username' => $this->user->username,
                 'name' => $this->user->name,
+                'created_at' => $this->user->created_at,
                 'phone' => $this->user->num_phone
             ],
             'book' => [
