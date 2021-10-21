@@ -10,6 +10,8 @@ class BookCondition extends Model
     use HasFactory;
 
     public $timestamps = false;
+
+    public $fillable = ['value'];
     
     public function getValueAttribute($value)
     {

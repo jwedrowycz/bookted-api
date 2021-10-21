@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -12,42 +13,11 @@ class UserTest extends TestCase
 {
     use RefreshDatabase, DatabaseMigrations;
 
-    public function testUserReturnsDataInValidFormat() {
-    
-        $this->json('get', 'api/users')
-             ->assertStatus(Response::HTTP_OK)
-             ->assertJsonStructure(
-                [
-                    'data' => [
-                        '*' => [
-                            'id',
-                            'username',
-                            'email',
-                            'created_at',
-                            'auctions' => [
-                                'id',
-                                'price',
-                                'created_at',
-                                'book' => [
-                                'id',
-                                'title',
-                                'description',
-                                'category',
-                                'book_condition',
-                                ],
-                                'images' => [
-                                    '*' => [
-                                        'id',
-                                        'created_at',
-                                        'updated_at',
-                                        'filename', 
-                                        'auction_id'
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-             );
-      }
+    public function test_user_profile_page_can_be_accessed()
+    {
+        $user = User::factory()->create()->first();
+
+        $response = $this->get('/api/users/' . $user->id);
+        $response->assertStatus(200);
+    }
 }
