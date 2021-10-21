@@ -114,6 +114,6 @@ class AuctionController extends Controller
 
         $auction->delete();
 
-        return response()->json(['message' => 'Aukcja została usunięta'], 200);
+        return response()->json(null, 204);
     }
 }
