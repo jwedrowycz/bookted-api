@@ -11,7 +11,10 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class AuctionTest extends TestCase
@@ -23,6 +26,42 @@ class AuctionTest extends TestCase
         $response = $this->get('/api/auctions');
 
         $response->assertStatus(200);
+    }
+
+    public function test_get_all_auctions()
+    {
+        $response = $this->getJson('/api/auctions');
+        $response->assertStatus(200);
+
+        $response->assertJsonStructure(
+            [
+                'data' => ['*' => [
+                    'id',
+                    'price',
+                    'views',
+                    'created_at',
+                    'user' => [
+                        'id',
+                        'username',
+                        'name',
+                        'created_at',
+                        'phone',
+                        'last_login_at'
+                    ],
+                    'book' => [
+                        'id',
+                        'title',
+                        'description',
+                        'category',
+                        'book_condition',
+                        'publish_date',
+                    ],
+                    'images' => [
+                        '*'
+                ]]
+                ]
+            ]
+        );
     }
 
     public function test_auction_and_book_can_be_created()
@@ -72,9 +111,8 @@ class AuctionTest extends TestCase
             'book_condition_id' => $bookCondition->id,
             'auction_id' => $auction->id
             ])->first();
-
-
-        $response = $this->actingAs($user, 'sanctum')->deleteJson('api/auctions/' . $auction->id);
+            
+        $response = $this->deleteJson('api/auctions/' . $auction->id);
 
         $response->assertStatus(204);
     }

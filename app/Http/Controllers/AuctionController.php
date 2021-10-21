@@ -114,7 +114,6 @@ class AuctionController extends Controller
         
         if(auth()->user()->cannot('delete', $auction)){
             return response()->json(['message' => 'Operacja zabroniona.'], 403);
-
         } 
 
         $auction->delete();
