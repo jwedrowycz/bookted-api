@@ -111,7 +111,11 @@ class AuctionController extends Controller
     public function destroy($id)
     {
         $auction = Auction::where('id', $id)->first();
-        abort_if($auction->user_id !== auth()->id(), 403);
+        
+        if(auth()->user()->cannot('delete', $auction)){
+            return response()->json(['message' => 'Operacja zabroniona.'], 403);
+
+        } 
 
         $auction->delete();
 

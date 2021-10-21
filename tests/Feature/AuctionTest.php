@@ -67,7 +67,11 @@ class AuctionTest extends TestCase
         ]);
         $user = User::factory()->create()->first();
         $auction = Auction::factory()->create(['user_id' => $user->id])->first();
-        $book = Book::factory()->create(['auction_id' => $auction->id]);
+        $book = Book::factory()->create([
+            'category_id'=>$category->id,
+            'book_condition_id' => $bookCondition->id,
+            'auction_id' => $auction->id
+            ])->first();
 
 
         $response = $this->actingAs($user, 'sanctum')->deleteJson('api/auctions/' . $auction->id);
