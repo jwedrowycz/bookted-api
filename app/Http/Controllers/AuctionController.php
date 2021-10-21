@@ -37,18 +37,19 @@ class AuctionController extends Controller
     {
         $validated = $request->validated();
         $data = DB::transaction(function () use ($validated) {
+            
+            $auction = Auction::create([
+                'price' => $validated['price'],
+                'user_id' => auth()->id(),
+            ]);
+
             $book = Book::create([
                 'title' => $validated['title'],
                 'description' => $validated['description'],
                 'publish_date' => $validated['publish_date'],
                 'book_condition_id' => $validated['book_condition_id'],
                 'category_id' => $validated['category_id'],
-            ]);
-
-            $auction = Auction::create([
-                'price' => $validated['price'],
-                'user_id' => auth()->id(),
-                'book_id' => $book->id,
+                'auction_id' => $auction->id,
             ]);
 
             $images = [];

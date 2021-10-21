@@ -12,7 +12,7 @@ class Auction extends Model
 
     // protected $with = ['user', 'book', 'images'];
 
-    protected $fillable = ['user_id', 'book_id', 'price'];
+    protected $fillable = ['user_id', 'price'];
 
     protected $dates = ['created_at', 'updated_at'];
     
@@ -24,7 +24,7 @@ class Auction extends Model
 
     public function book()
     {
-        return $this->belongsTo(Book::class);
+        return $this->hasOne(Book::class);
     }
 
     public function user()

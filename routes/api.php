@@ -3,7 +3,7 @@
 use App\Http\Controllers\AuctionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthController;
-
+use App\Http\Controllers\BookController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +27,5 @@ Route::apiResource('users', UserController::class);
 
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::get('/books', [BookController::class, 'index']);
