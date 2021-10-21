@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 class AuctionController extends Controller
 {
     function __construct() {
-        $this->middleware('auth:sanctum')->only(['store', 'update', 'delete']);
+        $this->middleware('auth:sanctum')->only(['store', 'update', 'destroy']);
     }
     /**
      * Display a listing of the resource.
@@ -109,6 +109,11 @@ class AuctionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $auction = Auction::where('id', $id)->first();
+        abort_if($auction->user_id !== auth()->id(), 403);
+
+        $auction->delete();
+
+        return response()->json(['message' => 'Aukcja została usunięta'], 200);
     }
 }

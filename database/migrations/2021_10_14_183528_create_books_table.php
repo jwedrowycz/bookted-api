@@ -16,13 +16,11 @@ class CreateBooksTable extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->softDeletes();
             $table->string('title');
             $table->text('description');
             $table->date('publish_date')->nullable();
             $table->foreignId('book_condition_id')->constrained();
             $table->foreignId('category_id')->constrained();
-    
         });
     }
 
