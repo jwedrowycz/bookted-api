@@ -28,7 +28,7 @@ class AuctionTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_get_all_auctions()
+    public function test_get_all_auctions() // Something wrong with this
     {
         $response = $this->getJson('/api/auctions');
         $response->assertStatus(200);
@@ -105,15 +105,17 @@ class AuctionTest extends TestCase
             'name' => 'Kryminał'
         ]);
         $user = User::factory()->create()->first();
-        $auction = Auction::factory()->create(['user_id' => $user->id])->first();
+        $auction = Auction::factory()->create(['user_id' => $user->id]);
         $book = Book::factory()->create([
             'category_id'=>$category->id,
             'book_condition_id' => $bookCondition->id,
             'auction_id' => $auction->id
             ])->first();
             
-        $response = $this->deleteJson('api/auctions/' . $auction->id);
+        $response = $this->actingAs($user)->deleteJson("api/auctions/{$auction->id}");
 
         $response->assertStatus(204);
+        
+       
     }
 }

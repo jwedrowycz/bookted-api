@@ -23,7 +23,7 @@ class AuctionController extends Controller
     public function index()
     {
         return AuctionResource::collection(
-            Auction::with('user', 'images', 'book', 'book.bookCondition', 'book.category')->latest()->paginate(50)
+            Auction::with('user', 'images', 'book', 'book.bookCondition', 'book.category')->withFilters()->latest()->paginate(50)
         );
     }
 
@@ -108,16 +108,13 @@ class AuctionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Auction $auction)
     {
-        $auction = Auction::where('id', $id)->first();
-        
         if(auth()->user()->cannot('delete', $auction)){
-            return response()->json(['message' => 'Operacja zabroniona.'], 403);
+            return response()->json(['message' => 'Forbidden.'], 403);
         } 
-
         $auction->delete();
-
         return response()->json(null, 204);
+
     }
 }

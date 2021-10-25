@@ -22,6 +22,17 @@ class Auction extends Model
         return $date->diffForHumans();
     }
 
+    public function scopeWithFilters($query)
+    {
+        return $query->when(request()->query('price') != 0, function($q) {
+            $q->whereBetween('price',[request()->query('price')[0], request()->query('price')[1]]);
+        });
+        // ->when(request()->query('priority') != 0, function($q) {
+        //     $q->where('priority_id', request()->query('priority'));
+        // }
+        // );
+    }
+
     public function book()
     {
         return $this->hasOne(Book::class);

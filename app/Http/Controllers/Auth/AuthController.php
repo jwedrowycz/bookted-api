@@ -11,7 +11,10 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    
+    public function __construct()
+    {
+    }
+
 
     /**
      * Handle an incoming registration request.
@@ -67,5 +70,10 @@ class AuthController extends Controller
                 'access_token' => $token,
                 'token_type' => 'Bearer',
         ], 200);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
     }
 }

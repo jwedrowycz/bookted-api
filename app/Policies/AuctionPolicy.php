@@ -65,10 +65,9 @@ class AuctionPolicy
      * @param  \App\Models\Auction  $auction
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Auction $auction)
+    public function delete(User $user, Auction $auction) : bool
     {
         return $user->id === $auction->user_id;
-
     }
 
     /**

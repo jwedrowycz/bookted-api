@@ -15,7 +15,7 @@ class AuctionSeeder extends Seeder
      */
     public function run()
     {
-        Auction::factory(300)
+        Auction::factory(1000)
         ->hasImages(5, function (array $attributes, Auction $auction) {
             return [
                 'filename' => 'https://source.unsplash.com/random/'. rand(400,1000) . 'x' . rand(500,1900),
