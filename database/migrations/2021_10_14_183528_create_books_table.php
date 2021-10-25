@@ -23,6 +23,9 @@ class CreateBooksTable extends Migration
             $table->foreignId('category_id')->constrained();
             $table->foreignId('auction_id')->constrained()->onDelete('cascade');
 
+            $table->index('category_id');
+            $table->index('auction_id');
+            $table->index('book_condition_id');
         });
     }
 

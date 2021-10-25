@@ -24,13 +24,19 @@ class Auction extends Model
 
     public function scopeWithFilters($query)
     {
-        return $query->when(request()->query('price') != 0, function($q) {
-            $q->whereBetween('price',[request()->query('price')[0], request()->query('price')[1]]);
+        return 
+        # Price min max
+        $query->when(request()->query('price') != 0, function($q) {
+            $q->whereBetween('price',[request()->query('price')['price_min'], request()->query('price')['price_max']]);
+        })
+        # Categories
+        ->when(request()->query('category'), function($q) {
+            $q->whereHas('book', function ($q) {
+                $q->whereHas('category', function ($q) {
+                    $q->where('name', request()->query('category'));
+                });
+            });
         });
-        // ->when(request()->query('priority') != 0, function($q) {
-        //     $q->where('priority_id', request()->query('priority'));
-        // }
-        // );
     }
 
     public function book()

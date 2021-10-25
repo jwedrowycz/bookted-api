@@ -25,6 +25,7 @@ class AuctionController extends Controller
         return AuctionResource::collection(
             Auction::with('user', 'images', 'book', 'book.bookCondition', 'book.category')->withFilters()->latest()->paginate(50)
         );
+
     }
 
     /**
